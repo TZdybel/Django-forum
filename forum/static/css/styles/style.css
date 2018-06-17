@@ -1,0 +1,45 @@
+body {
+    background: white url("../background.jpg");
+}
+
+h2 {
+    color: black;
+}
+
+
+#header-div ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #D40;
+}
+
+#header-div li {
+    float: left;
+    border-right:10px solid transparent;
+}
+
+#header-div li:last-child {
+    border-right: none;
+}
+
+#header-div li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: Bookman, URW Bookman L, serif
+}
+
+#header-div li a:hover:not(.active) {
+    background-color: #0AA;
+}
+
+#header-div .active {
+    background-color: #4CAF50;
+}
+
+
+

@@ -1,0 +1,37 @@
+{% extends 'forum/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <style>
+        body {
+            background: antiquewhite url("../../static/css/ksiazka.jpg") no-repeat center;
+            background-size: 1280px;
+            background-position: 300px 80px;
+        }
+
+        .position {
+            margin: auto;
+            width: 46%;
+            padding: 100px;
+        }
+
+        h2 {
+            color: darkslategrey;
+        }
+    </style>
+    <title>Logowanie</title>
+{% endblock %}
+
+{% block content %}
+    <div class="position">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p style="word-spacing: 3.4cm; ">
+            <button type="submit">Login</button>
+            <input type="button" value="Rejestracja" onclick="window.location.href='{% url 'forum:signup' %}'">
+            </p>
+        </form>
+    </div>
+{% endblock %}

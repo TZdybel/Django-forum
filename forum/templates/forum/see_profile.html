@@ -1,0 +1,56 @@
+{% extends 'forum/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <link rel="stylesheet" href="{% static 'css/styles/index.css' %}">
+    <style>
+    .button {
+      background-color: #f4511e;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      font-size: 16px;
+      margin: 4px 2px;
+      opacity: 0.6;
+      transition: 0.3s;
+      display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+      float: right;
+    }
+
+    .button:hover {opacity: 1}
+
+    td:hover {background-color: #DD4400}
+
+    </style>
+    <title>Profil {{ user.username }}</title>
+{% endblock %}
+
+{% block content %}
+    <p></p>
+    <table id="customers">
+        <tr>
+            <th>Nazwa użytkownika</th>
+        </tr>
+        <tr>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Imie i nazwisko</th>
+        </tr>
+        <tr>
+            <td>{{ user.first_name }}  {{ user.last_name }}</td>
+        </tr>
+    </table>
+    <input class="button" value="Edytuj profil" onclick="window.location.href='{% url 'forum:profile_update' user.username %}'">
+    <input class="button" value="Zmień hasło" onclick="window.location.href='{% url 'forum:password_change' user.username %}'">
+    <input class="button" value="Usuń konto" onclick="window.location.href='{% url 'forum:user_delete' user.username %}'">
+{% endblock %}

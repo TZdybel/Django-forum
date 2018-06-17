@@ -1,0 +1,40 @@
+{% extends 'forum/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <link rel="stylesheet" href="{% static 'css/styles/forum_view.css' %}">
+    <title>{{ category }}</title>
+{% endblock %}
+
+{% block content %}
+    <p></p>
+    <table id="customers">
+        <colgroup>
+            <col width="330">
+            <col width="70">
+        </colgroup>
+    {% for thread in threads %}
+        <tr>
+            <td style="background-color: #4CAF50">
+                <a style="padding: 0.5em;" href="{% url 'forum:thread_details' thread.category_name thread.pk %}">{{ thread.title }}</a>
+            </td>
+            <td style="background-color: #4CAF50">
+                {{ thread.author.username }}
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2" style="text-align: left">
+                <a style="padding: 1.5em;" href="{% url 'forum:thread_details' thread.category_name thread.pk %}">{{ thread.description|truncatechars:60 }}</a>
+            </td>
+            <td>
+                {{ thread.creation_date }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ thread.last_activity_date }}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

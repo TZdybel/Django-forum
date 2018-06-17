@@ -1,0 +1,50 @@
+ #customers {
+     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+     border-collapse: collapse;
+     width: 100%;
+ }
+ #customers td, #customers th {
+     padding: 20px;
+     text-align: center;
+     border: 1px solid #4CAF50;
+     font-family: Courier, cursive;
+     background-color: goldenrod;
+ }
+
+ /*#customers tr{background-color: goldenrod;}*/
+
+ #customers td {
+     width: 200px;
+     height: 100%;
+     border-color: goldenrod;
+ }
+
+ #customers td a {
+     display: inline-block;
+     height:100%;
+     width:100%;
+     margin: -10em;
+     padding: 1.5em;
+     text-decoration: none;
+     color: #222222;
+ }
+
+ #customers td:hover {background-color: #4CAF50;}
+
+ #customers th {
+     padding-top: 12px;
+     padding-bottom: 12px;
+     text-align: center;
+     background-color: #4CAF50;
+     color: #222222;
+ }
+
+  h2 {
+     width: 1980px;
+     height: 50px;
+     margin-bottom: 1px;
+     background-color: darkcyan;
+     display: table-cell;
+     vertical-align: middle;
+     font-family: "Noto Mono"
+ }

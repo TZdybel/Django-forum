@@ -1,0 +1,29 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles/style.css' %}">
+    <meta charset="UTF-8">
+    {% block title %}
+    {% endblock %}
+</head>
+
+<body>
+<div id="header-div">
+    <ul>
+      <li><a class="active" href="{% url 'forum:index' %}"><img src="../../static/css/home2.jpg" alt="Strona główna" height="14" width="17"></a></li>
+      {% if user.is_authenticated %}
+          <li style="float:right"><a href="{% url 'forum:logout' %}">Wyloguj</a></li>
+          <li style="float:right"><a href="{% url 'forum:add_thread' %}">Dodaj wątek</a></li>
+          <li style="float:right"><a href="{% url 'forum:see_profile' user.username %}">Profil</a></li>
+      {% else %}
+          <li style="float:right"><a href="{% url 'forum:login' %}">Zaloguj</a></li>
+      {% endif %}
+    </ul>
+</div>
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

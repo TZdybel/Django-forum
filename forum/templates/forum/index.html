@@ -1,0 +1,31 @@
+{% extends 'forum/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <link rel="stylesheet" href="{% static 'css/styles/index.css' %}">
+    <title>Forum</title>
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2 align="middle">Witaj na forum {{ user.username }}!</h2>
+    {% else %}
+        <h2 align="middle">Nie jesteś zalogowany ☹</h2>
+    {% endif %}
+    <br>
+    <table id="customers">
+        <tr>
+            <th colspan="2">Kategorie</th>
+        </tr>
+        {% for cat1, cat2 in categories %}
+            <tr>
+                <td><a href="{% url 'forum:threadlist' cat1 %}">{{ cat1 }}</a></td>
+                {% if cat2 != "" %}
+                    <td><a href="{% url 'forum:threadlist' cat2 %}">{{ cat2 }}</a></td>
+                {% else %}
+                    <td style="background-color: transparent; opacity: 0.0; border: none;">{{ cat2 }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

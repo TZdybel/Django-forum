@@ -1,0 +1,77 @@
+{% extends 'forum/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <link rel="stylesheet" href="{% static 'css/styles/thread_details.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ thread.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <h2>{{ thread.title }}</h2>
+
+    <div class="row">
+        <div class="column" style="width: 70%">
+            <p class="border1">{{ thread.description}}</p>
+        </div>
+        <div class="column" style="width: 30%">
+            <p>
+                <h4>Autor:</h4>{{ thread.author }}
+            </p>
+            <p>
+                <h4>Data opublikowania:</h4>{{ thread.creation_date }}<br>
+            </p>
+            {% if user.is_authenticated and user == thread.author %}
+                <a href="{% url 'forum:thread_delete' thread.category_name thread.pk %}"><img src="../../static/css/X.jpg" height="20" width="20"></a>
+            {% endif %}
+            {#            PRZYCISK#}
+
+        </div>
+    </div>
+    {% for post in thread.post_set.all %}
+        <div class="row">
+            <div class="column" style="width: 70%">
+                <p class="border2">{{ post.text }}</p>
+            </div>
+            <div class="column" style="width: 30%">
+            <br>
+                <p>
+                    <b>Autor: </b>{{ post.author }}
+                </p>
+                <p>
+                    <b>Data odpowiedzi: </b>{{ post.posting_date }}
+                </p>
+{#                PRZYCISK#}
+                {% if user.is_authenticated and user == post.author %}
+                    <a href="{% url 'forum:delete_post' thread.category_name thread.pk post.pk %}"><img src="../../static/css/X.jpg" height="20" width="20"></a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    <p>
+        {% if message %}
+            <form method="post">
+            {% csrf_token %}
+                {% for field in form %}
+                    <div class="wrapper">
+                        <p>
+                            {{ field }}<br>
+                            {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                    </div>
+                {% endfor %}
+                <p>
+                    <div class="wrapper">
+                    <button class="button" type="submit">Zatwierdź</button>
+                    </div>
+                </p>
+            </form>
+        {% else %}
+            <div class="wrapper">
+                <input class="button" value="Odpowiedz" onclick="window.location.href='{% url 'forum:answer' category thread.pk %}'">
+            </div>
+        {% endif %}
+    </p>
+{% endblock %}
